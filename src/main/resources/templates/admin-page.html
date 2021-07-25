@@ -1,0 +1,76 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="stylesheet type="text/css"
+        th:href="@{/webjars/bootstrap/4.4.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{../css/main.css}" />
+    <title>Admins</title>
+</head>
+<body>
+<div class="container">
+    <h1>Admin Page</h1>
+    <div class="row">
+        <div claa="col-md-12">
+            <a href="/" th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <a href="/" th:href="@{/}">Main Page</a>
+    </div>
+</div>
+<div class="container">
+    <table class="table-bordered">
+        <thead class="tab-header-area">
+        <tr>
+            <th>DELETE</th>
+            <th>USERNAME</th>
+            <th>USER MAIL</th>
+            <th>CHANGE EMAIL</th>
+            <th>SAVE</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user :${users}">
+            <td>
+                <form th:action="@{/admin-page/delete}" method="post">
+                    <button type="submit" th:value="${user.id}" th:name="id"
+                            class="btn btn-danger btn-block">X</button>
+                </form>
+            </td>
+            <td>
+                <li type="text" th:name="username"
+                    th:text="${user.username}"></li>
+            </td>
+            <td>
+                <li type="text" th:name="mail"
+                    th:text="${user.email}"></li>
+            </td>
+            <form th:action="@{/admin-page/update}" method="post">
+                <td>
+                    <input id="userMail"
+                    class="form-control"
+                    placeholder="New mail"
+                    type="text"
+                    name="userMail"/>
+                </td>
+                <td>
+                    <div class="form-group">
+                        <button type="submit" th:value="${user.username}"
+                                th:name="old_userMail"
+                                class="btn btn-sucess btn-block">
+                            Save
+                        </button>
+                    </div>
+                </td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js/}"></script>
+<script type="text/javascript" th:src="@{/webjars/bootstrap/4.4.1/js/bootstrap.min.js/}"></script>
+</body>
+</html>
